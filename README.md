@@ -73,12 +73,12 @@ Big Mart Integrated Data Analysis Project Using MySQL, Python, Excel and Power B
    - **Tier 2 outlet locations** recorded the highest sales compared to Tier 1 and Tier 3 outlets, with approximately ** 43% higher sales percentage**, indicating that Tier 2 regions are key contributors to revenue.
 
 
- ## Recommendations:
+ ## Recommendations
 
-    - **Promote Low Fat products:** Since Low Fat items generate the highest number of orders and contribute significantly to total revenue, marketing campaigns and inventory strategies should focus on expanding and promoting these products.
-    - **Expand Small -sized outlets:** Small outlets are outperforming Medium and High outlet sizes in total sales. Investing more in small outlets and exploring new locations could improve profitability and market reach.
-    - **Target Tier 2 locations:**  With Tier 2 outlets approximately **43% higher sales** compared to Tier 1 and Tier 3, expanding operations or running targeted promotions in Tier 2 regions could further boost sales and customer engagement.
-    - **Monitor sales trends:**  Regularly analyzing sales across outlet types and regions will help identify emerging patterns and adjust strategies accordingly for sustained growth.
+   - **Promote Low Fat products:** Since Low Fat items generate the highest number of orders and contribute significantly to total revenue, marketing campaigns and inventory strategies should focus on expanding and promoting these products.
+   - **Expand Small -sized outlets:** Small outlets are outperforming Medium and High outlet sizes in total sales. Investing more in small outlets and exploring new locations could improve profitability and market reach.
+   - **Target Tier 2 locations:**  With Tier 2 outlets approximately **43% higher sales** compared to Tier 1 and Tier 3, expanding operations or running targeted promotions in Tier 2 regions could further boost sales and customer engagement.
+   - **Monitor sales trends:**  Regularly analyzing sales across outlet types and regions will help identify emerging patterns and adjust strategies accordingly for sustained growth.
     
 
  
