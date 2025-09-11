@@ -11,11 +11,13 @@ Big Mart Integrated Data Analysis Project Using MySQL, Python, Excel and Power B
  - [Recommendations](#recommendations)
 
 
+
  ## Project Overview
 
   - This project conducts a comprehensive analysis of Big Mart’s sales performance and Inventory distribution to identify key insights and
     opportunities for optimization using various KPI’s and visualizations in Power Bi.
   - The analysis has been carried out using tools such as MySQL, Python, Excel and Power Bi to efficiently handle data, perform exploratory analysis and create visual dashboard.
+
 
 
  ## Tools and Technologies Used  
@@ -33,8 +35,9 @@ Big Mart Integrated Data Analysis Project Using MySQL, Python, Excel and Power B
      - **Microsoft Excel:** Used for pivot tables, charts.
 
  - **Data Visualization & Dashboarding:**
-     - **Power BI:** Created interactive dashboard and visual reports to present findings effectively.
+     - **Power BI:** CrMeated interactive dashboard and visual reports to present findings effectively.
   
+
 
  ## Project Flow Summary  
  
@@ -57,6 +60,8 @@ Big Mart Integrated Data Analysis Project Using MySQL, Python, Excel and Power B
       -	Presented key findings in a user- friendly format.
     
 
+
+
  ## Dataset   
   
   - **Source:** [Bigmart Sales Dataset on Kaggle]( https://www.kaggle.com/datasets/ahmadrezagholami2001/bigmart-sales-dataset)
@@ -64,13 +69,19 @@ Big Mart Integrated Data Analysis Project Using MySQL, Python, Excel and Power B
   - **Issues:**
      - Formatting inconsistencies (e.g., “Low Fat” vs “low fat”) were standardized.
      - Null values were represented as NA in the dataset, which required preprocessing before analysis.
-   
 
+
+   
  ## Results/Findings
 
-   - **Low Fat Products** account for the highest number of orders and total sales. Although the average sales per order for Low Fat products is slightly lower than that of Regular products, the overall contribution of Low Fat items to revenue is significant and acceptable.
+   - **Low Fat Products** account for the highest number of orders and total sales. Although the average sales per order for Low Fat products is slightly lower than that of Regular products, the overall contribution of Low Fat items to revenue is significant and acceptable.    
    - **Small-sized outlets** are generating higher total sales compared to Medium and High outlet sizes. This suggests that investing in and expanding small outlets could be a strategic move for improving profitability in the future.
    - **Tier 2 outlet locations** recorded the highest sales compared to Tier 1 and Tier 3 outlets, with approximately ** 43% higher sales percentage**, indicating that Tier 2 regions are key contributors to revenue.
+     
+   ![Sales BY Fat Content](images/sales_by_fat_content.png)
+   ![Sales By Outlet Location](images/sales_by_outlet_location.png)
+   
+
 
 
  ## Recommendations
