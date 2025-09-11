@@ -1,0 +1,354 @@
+SQL
+
+
+SHOW DATABASES;
+
+CREATE DATABASE Bigmart_db;
+
+USE Bigmart_db;
+
+CREATE TABLE bigmart_sales
+            ( 
+ 
+                Item_Identifier	VARCHAR(10),
+                Item_Weight	FLOAT,
+                Item_Fat_Content VARCHAR(20),
+                Item_Visibility	FLOAT,
+		Item_Type VARCHAR(40),
+                Item_MRP FLOAT,
+                Outlet_Identifier VARCHAR(20),	
+                Outlet_Establishment_Year INT(4),
+                Outlet_Size	VARCHAR(10),
+                Outlet_Location_Type VARCHAR(10),
+                Outlet_Type VARCHAR(50),
+                Item_Outlet_Sales FLOAT
+                
+	    );
+
+-- Number of rows
+
+SELECT COUNT(*) FROM bigmart_sales;
+SELECT * FROM bigmart_sales;
+
+
+-- Unique Item Fat Content
+
+SELECT DISTINCT(Item_Fat_Content)
+FROM bigmart_sales;
+
+
+-- Data Cleaning and formatting
+
+
+
+SET SQL_SAFE_UPDATES=0;
+UPDATE bigmart_sales
+SET Item_Fat_Content =
+CASE
+
+WHEN Item_Fat_Content IN ('LF', 'low fat') THEN 'LOW FAT'
+WHEN Item_Fat_Content = 'reg' THEN 'Regular'
+ELSE Item_Fat_Content
+
+END;
+
+
+SELECT DISTINCT(Item_Fat_Content) FROM bigmart_sales;
+
+--update low fat to Low Fat
+
+UPDATE bigmart_sales
+SET Item_Fat_Content =
+CASE
+
+WHEN Item_Fat_Content ='LOW FAT' THEN 'Low Fat'
+ELSE Item_Fat_Content
+
+END;
+SELECT * FROM bigmart_sales;
+
+
+-- The total revenue generated from all items sold.
+
+SELECT SUM(Item_Outlet_Sales) AS Total_Sales
+FROM bigmart_sales;
+
+
+
+-- Finding Null values if any
+
+SELECT *
+FROM bigmart_sales
+WHERE 
+Item_Identifier IS NULL
+AND
+Item_Weight IS NULL
+AND
+Item_Fat_Content IS NULL
+AND
+Item_Visibility IS NULL
+AND
+Item_Type IS NULL
+AND
+Item_MRP IS NULL
+AND
+Outlet_Identifier IS NULL
+AND
+Outlet_Establishment_Year IS NULL
+AND
+Outlet_Size IS NULL
+AND
+Outlet_Location_Type IS NULL
+AND
+Outlet_Type IS NULL
+AND
+Item_Outlet_Sales IS NULL;
+
+
+-- Update total sales with 2 decimal digits
+
+UPDATE bigmart_sales
+SET Item_Outlet_Sales = ROUND(Item_Outlet_Sales,2);
+
+
+-- Update Item MRP  with 2 decimal digits
+
+UPDATE bigmart_sales
+SET Item_MRP = ROUND(Item_MRP,2);
+
+
+-- Update Item_Visibility  with 2 decimal digits
+
+UPDATE bigmart_sales
+SET Item_Visibility = ROUND( Item_Visibility,2);
+
+
+
+-- Query to round Item_Identifier to 2 decimal digits
+
+SELECT Item_Identifier, ROUND(Item_Visibility,2)
+FROM bigmart_sales;
+
+
+-- Query to select everything from the bigmart_sales table
+
+SELECT DISTINCT(Outlet_Size) from bigmart_sales;
+
+
+
+--Query to find total of item outlet sales in millions rounded to 2 decimal digits
+
+SELECT CAST(SUM(Item_Outlet_Sales)/1000000 AS DECIMAL(10,2)) AS Total_Sales_Millions
+from bigmart_sales;
+
+-- The average revenue per sale.
+
+SELECT CAST(AVG(Item_Outlet_Sales) AS Decimal(10,2)) AS Average_Sales
+FROM bigmart_sales;
+
+-- The total count of different items sold.
+
+SELECT COUNT(*) AS Number_of_Items
+FROM bigmart_sales;
+
+-- Total Sales by Fat Content
+
+SELECT CAST(SUM(Item_Outlet_Sales)/1000000 AS DECIMAL(10,2)) AS Total_Sales_Millions
+from bigmart_sales
+WHERE Item_Fat_Content ='Low Fat';
+
+-- AVG Sales by Fat_Content
+
+SELECT CAST(AVG(Item_Outlet_Sales) AS Decimal(10,2)) AS Average_Sales
+FROM bigmart_sales
+WHERE Item_Fat_Content ='Low Fat';
+
+-- Number of items by Fat Content
+
+SELECT COUNT(*) AS Number_of_Items
+FROM bigmart_sales
+WHERE Item_Fat_Content ='Low Fat';
+
+-- Item Fat Content for Total Sales,Avg Sales, Number of items
+
+SELECT Item_Fat_Content,
+CAST(SUM(Item_Outlet_Sales)/1000000 AS DECIMAL(10,2)) AS Total_Sales_Millions,
+CAST(AVG(Item_Outlet_Sales) AS Decimal(10,2)) AS Average_Sales,
+COUNT(*) AS Number_of_Items
+FROM bigmart_sales
+GROUP BY Item_Fat_Content
+ORDER BY Total_Sales_Millions Desc;
+  	
+
+-- Total Sales by item type
+
+SELECT Item_Type, CAST(SUM(Item_Outlet_Sales)/1000000 AS DECIMAL(10,2)) AS Total_Sales_Millions
+FROM bigmart_sales
+GROUP BY Item_Type;
+
+-- Total Sales by item type,Item_Fat_Content, Outlet_Establishment_Year, Outlet_Size, Outlet_Location_Type, Outlet_Type
+
+SELECT Item_Type, Item_Fat_Content, Outlet_Establishment_Year, Outlet_Size, Outlet_Location_Type, Outlet_Type,
+CAST(SUM(Item_Outlet_Sales)/1000000 AS DECIMAL(10,2)) AS Total_Sales_Millions
+FROM bigmart_sales
+GROUP BY Item_Type, Item_Fat_Content, Outlet_Establishment_Year, Outlet_Size, Outlet_Location_Type, Outlet_Type
+ORDER BY Total_Sales_Millions DESC;
+
+-- Avg Sales by item type
+
+SELECT Item_Type, CAST(AVG(Item_Outlet_Sales) AS Decimal(10,2)) AS Average_Sales
+FROM bigmart_sales
+GROUP BY Item_Type;
+
+-- Number of items by item type
+
+SELECT Item_Type, COUNT(*) AS Number_of_Items
+FROM bigmart_sales
+GROUP BY Item_Type;
+
+-- All metrics by item type
+
+SELECT Item_Type,
+CAST(SUM(Item_Outlet_Sales)/1000 AS DECIMAL(10,2)) AS Total_Sales_Thousands,
+CAST(AVG(Item_Outlet_Sales) AS Decimal(10,2)) AS Average_Sales,
+COUNT(*) AS Number_of_Items
+FROM bigmart_sales
+GROUP BY Item_Type
+ORDER BY Total_Sales_Thousands Desc LIMIT 5;
+
+-- Total Sales by outlet Establishment Year
+
+SELECT Outlet_Establishment_Year, CAST(SUM(Item_Outlet_Sales)/1000000 AS DECIMAL(10,2)) AS Total_Sales_Millions
+FROM bigmart_sales
+GROUP BY Outlet_Establishment_Year
+ORDER BY Total_Sales_Millions desc;
+
+-- Total Sales, Avg Sales,Number of items based on Outlet Establishment Year
+
+SELECT Outlet_Establishment_Year,
+CAST(SUM(Item_Outlet_Sales)/1000000 AS DECIMAL(10,2)) AS Total_Sales_Millions,
+CAST(AVG(Item_Outlet_Sales) AS DECIMAL(10,1)) AS Average_Sales,
+COUNT(*) AS No_of_Items
+FROM bigmart_sales
+GROUP BY Outlet_Establishment_Year
+ORDER BY Outlet_Establishment_Year;
+
+-- Total Sales by outlet type
+
+SELECT Outlet_Type
+, CAST(SUM(Item_Outlet_Sales)/1000000 AS DECIMAL(10,2)) AS Total_Sales_Millions
+FROM bigmart_sales
+GROUP BY Outlet_Type
+ORDER BY Total_Sales_Millions desc;
+
+-- AVG Sales by outlet Establishment
+
+SELECT Outlet_Establishment_Year, CAST(AVG(Item_Outlet_Sales) AS Decimal(10,2)) AS Average_Sales
+FROM bigmart_sales
+GROUP BY Outlet_Establishment_Year
+ORDER BY Average_Sales desc;
+
+
+-- Total Sales by outlet Size
+
+SELECT Outlet_Size, CAST(SUM(Item_Outlet_Sales)/1000000 AS DECIMAL(10,2)) AS Total_Sales_Millions
+FROM bigmart_sales
+GROUP BY Outlet_Size
+ORDER BY Total_Sales_Millions DESC;
+
+-- Fat content by outlet type for total sales
+
+SELECT Outlet_Type,Item_Fat_Content,
+CAST(SUM(Item_Outlet_Sales)/1000000 AS DECIMAL(10,2)) AS Total_Sales_Millions,
+CAST(AVG(Item_Outlet_Sales) AS Decimal(10,2)) AS Average_Sales,
+COUNT(*) AS Number_of_Items
+FROM bigmart_sales
+GROUP BY Outlet_Type, Item_Fat_Content
+ORDER BY Total_Sales_Millions DESC;
+
+-- Fat content by outlet for total sales,Avg Sales, Number of items for the Establishment year 2007
+
+SELECT Outlet_Type,Item_Fat_Content,
+CAST(SUM(Item_Outlet_Sales)/1000000 AS DECIMAL(10,2)) AS Total_Sales_Millions,
+CAST(AVG(Item_Outlet_Sales) AS Decimal(10,2)) AS Average_Sales,
+COUNT(*) AS Number_of_Items
+FROM bigmart_sales
+WHERE Outlet_Establishment_Year =2007
+GROUP BY Outlet_Type, Item_Fat_Content
+ORDER BY Total_Sales_Millions DESC;
+
+-- Fat content by item type for total sales ,Avg Sales, Number of items sold for the top 5
+
+SELECT Item_Type ,Item_Fat_Content,
+CAST(SUM(Item_Outlet_Sales)/1000000 AS DECIMAL(10,2)) AS Total_Sales_Millions,
+CAST(AVG(Item_Outlet_Sales) AS Decimal(10,2)) AS Average_Sales,
+COUNT(*) AS Number_of_Items
+FROM bigmart_sales
+GROUP BY Item_Type, Item_Fat_Content
+ORDER BY Total_Sales_Millions DESC LIMIT 5;
+
+--  Fat content by Outlet location type for total sales ,Avg Sales, Number of items sold 
+
+SELECT Outlet_Location_Type ,Item_Fat_Content,
+CAST(SUM(Item_Outlet_Sales)/1000000 AS DECIMAL(10,2)) AS Total_Sales_Millions,
+CAST(AVG(Item_Outlet_Sales) AS Decimal(10,2)) AS Average_Sales,
+COUNT(*) AS Number_of_Items
+FROM bigmart_sales
+GROUP BY Outlet_Location_Type, Item_Fat_Content
+ORDER BY Total_Sales_Millions DESC LIMIT 5;
+
+ 
+-- Percentage of Sales by outlet location and outlet Establishment Year
+
+SELECT 
+Outlet_Location_Type, Outlet_Establishment_Year,
+CAST(SUM(Item_Outlet_Sales) AS DECIMAL(10,2)) AS Total_Sales,
+CAST(SUM(Item_Outlet_Sales) * 100/ SUM(SUM(Item_Outlet_Sales)) OVER() AS DECIMAL(10,2)) AS Sales_Percentage,
+CAST(AVG(Item_Outlet_Sales) AS Decimal(10,2)) AS Average_Sales,
+COUNT(*) AS Number_of_Items
+FROM bigmart_sales
+GROUP BY Outlet_Location_Type, Outlet_Establishment_Year
+ORDER BY Outlet_Establishment_Year;
+
+
+-- All Metrics Percentage of Sales by outlet location
+
+SELECT 
+Outlet_Location_Type,
+CAST(SUM(Item_Outlet_Sales)/1000000 AS DECIMAL(10,2)) AS Total_Sales_Millions,
+CAST(SUM(Item_Outlet_Sales) * 100/ SUM(SUM(Item_Outlet_Sales)) OVER() AS DECIMAL(10,2)) AS Sales_Percentage,
+CAST(AVG(Item_Outlet_Sales) AS Decimal(10,2)) AS Average_Sales,
+COUNT(*) AS Number_of_Items
+FROM bigmart_sales
+GROUP BY Outlet_Location_Type
+ORDER BY Total_Sales_Millions;
+
+
+ -- Percentage of Sales by outlet location for the Establishment year 2004 vs 2007
+ 
+ SELECT Outlet_Establishment_Year, Outlet_Location_Type, Outlet_Size,
+CAST(SUM(Item_Outlet_Sales) AS DECIMAL(10,2)) AS Total_Sales,
+CAST(SUM(Item_Outlet_Sales) * 100/ SUM(SUM(Item_Outlet_Sales)) OVER() AS DECIMAL(10,2)) AS Sales_Percentage,
+CAST(AVG(Item_Outlet_Sales) AS Decimal(10,2)) AS Average_Sales,
+COUNT(*) AS Number_of_Items
+FROM bigmart_sales
+WHERE Outlet_Establishment_Year IN (2004,2007)
+GROUP BY Outlet_Establishment_Year, Outlet_Location_Type, Outlet_Size
+ORDER BY Total_Sales DESC;
+ 
+ -- Total Sales,Percentage of Sales,Avg Sales,Number of items by Outlet Type
+ 
+SELECT Outlet_Type,
+CAST(SUM(Item_Outlet_Sales) AS DECIMAL(10,2)) AS Total_Sales,
+CAST(SUM(Item_Outlet_Sales) * 100/ SUM(SUM(Item_Outlet_Sales)) OVER() AS DECIMAL(10,2)) AS Sales_Percentage,
+CAST(AVG(Item_Outlet_Sales) AS Decimal(10,2)) AS Average_Sales,
+COUNT(*) AS Number_of_Items
+FROM bigmart_sales
+GROUP BY Outlet_Type
+ORDER BY Total_Sales DESC;
+
+
+
+
+
+
