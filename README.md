@@ -23,7 +23,7 @@ Big Mart Integrated Data Analysis Project Using MySQL, Python, Excel and Power B
  ## Tools and Technologies Used  
 
  - **Database Management:**
-    - **MySQL:** : Used to store, query, manage the sales dataset efficiently along with data cleaning and formatting.
+    - **MySQL:** Used to store, query, manage the sales dataset efficiently along with data cleaning and formatting.
 
  - **Programming & Data Analysis:**
      - **Python:**  Utilised for transformation and exploratory analysis.
