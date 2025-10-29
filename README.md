@@ -23,7 +23,7 @@ Big Mart Integrated Data Analysis Project Using MySQL, Python, Excel and Power B
  ## Tools and Technologies Used  
 
  - **Database Management:**
-    - **MySQL:** :** Used to store, query, manage the sales dataset efficiently along with data cleaning and formatting.
+    - **MySQL:** : Used to store, query, manage the sales dataset efficiently along with data cleaning and formatting.
 
  - **Programming & Data Analysis:**
      - **Python:**  Utilised for transformation and exploratory analysis.
@@ -35,7 +35,7 @@ Big Mart Integrated Data Analysis Project Using MySQL, Python, Excel and Power B
      - **Microsoft Excel:** Used for pivot tables, charts.
 
  - **Data Visualization & Dashboarding:**
-     - **Power BI:** CrMeated interactive dashboard and visual reports to present findings effectively.
+     - **Power BI:** Created interactive dashboard and visual reports to present findings effectively.
   
 
 
@@ -76,7 +76,7 @@ Big Mart Integrated Data Analysis Project Using MySQL, Python, Excel and Power B
 
    - **Low Fat Products** account for the highest number of orders and total sales. Although the average sales per order for Low Fat products is slightly lower than that of Regular products, the overall contribution of Low Fat items to revenue is significant and acceptable.    
    - **Small-sized outlets** are generating higher total sales compared to Medium and High outlet sizes. This suggests that investing in and expanding small outlets could be a strategic move for improving profitability in the future.
-   - **Tier 2 outlet locations** recorded the highest sales compared to Tier 1 and Tier 3 outlets, with approximately ** 43% higher sales percentage**, indicating that Tier 2 regions are key contributors to revenue.
+   - **Tier 2 outlet locations** recorded the highest sales compared to Tier 1 and Tier 3 outlets, with approximately **43% higher sales percentage** , indicating that Tier 2 regions are key contributors to revenue.
      
    ![Sales BY Fat Content](images/sales_by_fat_content.png)
    ![Sales By Outlet Location](images/sales_by_outlet_location.png)
